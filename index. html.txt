@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Dhiya ❤️</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body {
+      min-height: 100vh;
+      background: url('REPLACE_WITH_YOUR_IMAGE_URL') center/cover no-repeat fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    .overlay {
+      background: rgba(0,0,0,0.55);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 800px;
+      animation: fadeIn 2s ease;
+    }
+    h1, h2 { margin-bottom: 20px; }
+    p { font-size: 18px; line-height: 1.6; }
+    button {
+      margin: 15px;
+      padding: 12px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button:hover { transform: scale(1.1); }
+    .next { background: #ff4d6d; color: white; }
+    .yes { background: #2ecc71; color: white; }
+    .no { background: #e74c3c; color: white; }
+
+    .hidden { display: none; }
+
+    .hearts span {
+      position: absolute;
+      font-size: 30px;
+      animation: float 4s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<audio id="bgMusic" src="romantic-music.mp3" loop autoplay></audio>
+<audio id="happyMusic" src="celebration-music.mp3"></audio>
+<audio id="sadMusic" src="sad-music.mp3"></audio>
+
+<div class="overlay" id="step1">
+  <h1>Dhiya ❤️</h1>
+  <p>
+    From the moment you walked into my life, everything changed. You make ordinary days magical, and I can’t imagine a future without you.<br><br>
+    With all my heart,<br>
+    <b>Liswanth</b>
+  </p>
+  <button class="next" onclick="nextStep()">Next</button>
+</div>
+
+<div class="overlay hidden" id="step2">
+  <h2>Dhiya noo no Diya cheloo ❤️</h2>
+  <h1>Will you be my wife? 💍</h1>
+  <button class="yes" onclick="sayYes()">Yes</button>
+  <button class="no" onclick="sayNo()">No</button>
+</div>
+
+<div class="overlay hidden" id="yesResult">
+  <h1>🎉 Congratulations 🎉</h1>
+  <p>
+    Because your selection is one of the diamonds in the world 💎<br>
+    One and only rare piece you selected, mam ❤️
+  </p>
+</div>
+
+<div class="overlay hidden" id="noResult">
+  <h1>😔 Sorry Mam</h1>
+  <p>You missed the rare piece 💔</p>
+</div>
+
+<div class="hearts" id="hearts"></div>
+
+<script>
+  function nextStep() {
+    document.getElementById('step1').classList.add('hidden');
+    document.getElementById('step2').classList.remove('hidden');
+  }
+
+  function sayYes() {
+    document.getElementById('step2').classList.add('hidden');
+    document.getElementById('yesResult').classList.remove('hidden');
+    document.getElementById('bgMusic').pause();
+    document.getElementById('happyMusic').play();
+
+    let hearts = document.getElementById('hearts');
+    let start = Date.now();
+
+    let interval = setInterval(() => {
+      let span = document.createElement('span');
+      span.innerHTML = '❤️';
+      span.style.left = Math.random() * 100 + 'vw';
+      span.style.animationDuration = (2 + Math.random() * 3) + 's';
+      hearts.appendChild(span);
+
+      setTimeout(() => span.remove(), 5000);
+
+      if (Date.now() - start > 12000) {
+        clearInterval(interval);
+      }
+    }, 200);
+  }
+
+  function sayNo() {
+    document.getElementById('step2').classList.add('hidden');
+    document.getElementById('noResult').classList.remove('hidden');
+    document.getElementById('bgMusic').pause();
+    document.getElementById('sadMusic').play();
+  }
+</script>
+
+</body>
+</html>
